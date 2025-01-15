@@ -1,4 +1,4 @@
-name: DELETE_order_by_id
+name: Tests
 
 on:
   push:
