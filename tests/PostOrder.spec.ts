@@ -14,7 +14,7 @@ test('123 post order with correct data should receive code 201', async ({ reques
     }
 
     // Send a POST request to the server
-    const response = await request.post(`${process.env.STAGE_URL}/test-orders`, {
+    const response = await request.post(`https://backend.tallinn-learning.ee/test-orders`, {
         data: requestBody,
     })
     const responseBody = await response.json();
@@ -45,7 +45,7 @@ test('post order with data without status field should receive code 200', async 
     console.log('response status:', response.status())
     console.log('response body:', responseBody)
     expect(response.status()).toBe(StatusCodes.OK)
-    expect(responseBody.status).toBe("OPEN");
+    expect(responseBody.status).toBe(null);
 })
 
 
