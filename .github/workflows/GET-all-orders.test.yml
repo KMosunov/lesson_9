@@ -1,4 +1,4 @@
-name: DELETE-order-by-id tests
+name: GET-all-orders tests
 
 on:
   push:
@@ -42,4 +42,4 @@ jobs:
       - name: Run Playwright API tests
         run: |
           echo "Running Playwright to execute API tests..."
-          npx playwright test /HW_09/Delete-order-by-id.spec.ts
+          npx playwright test /HW_09/GET-all-orders.spec.ts
