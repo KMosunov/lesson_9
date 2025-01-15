@@ -42,4 +42,4 @@ jobs:
       - name: Run Playwright API tests
         run: |
           echo "Running Playwright to execute API tests..."
-          npm playwright test:DELETE_order_by_id    
+          npx playwright test    
