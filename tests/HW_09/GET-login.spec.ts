@@ -1,15 +1,17 @@
 import { expect, test } from '@playwright/test'
 import { StatusCodes } from 'http-status-codes'
 
-test('Successful authentication with correct username and password. Status 200', async ({ request }) => {
+test('Successful authentication with correct username and password. Status 200', async ({
+  request,
+}) => {
   const requestParameters = {
-    'username': 'A',
-    'password': 'qwe'
+    username: 'A',
+    password: 'qwe',
   }
   const response = await request.get('https://backend.tallinn-learning.ee/test-orders', {
-        params: requestParameters
+    params: requestParameters,
   })
-  const responseBody = await response.json();
+  const responseBody = await response.json()
 
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
@@ -19,15 +21,17 @@ test('Successful authentication with correct username and password. Status 200',
   expect(responseBody.apiKey).not.toBe(null)
 })
 
-test('Unsuccessful with incorrect username and correct password. Status 400', async ({ request }) => {
+test('Unsuccessful with incorrect username and correct password. Status 400', async ({
+  request,
+}) => {
   const requestParameters = {
-    'username': 123,
-    'password': 'qwe'
+    username: 123,
+    password: 'qwe',
   }
   const response = await request.get('https://backend.tallinn-learning.ee/test-orders', {
-    params: requestParameters
+    params: requestParameters,
   })
-  const responseBody = await response.json();
+  const responseBody = await response.json()
 
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
@@ -39,15 +43,17 @@ test('Unsuccessful with incorrect username and correct password. Status 400', as
   expect(response.status()).toBe(StatusCodes.OK)
 })
 
-test('Unsuccessful with correct username and incorrect password. Status 400', async ({ request }) => {
+test('Unsuccessful with correct username and incorrect password. Status 400', async ({
+  request,
+}) => {
   const requestParameters = {
-    'username': 'A',
-    'password': 123
+    username: 'A',
+    password: 123,
   }
   const response = await request.get('https://backend.tallinn-learning.ee/test-orders', {
-    params: requestParameters
+    params: requestParameters,
   })
-  const responseBody = await response.json();
+  const responseBody = await response.json()
 
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
@@ -61,13 +67,13 @@ test('Unsuccessful with correct username and incorrect password. Status 400', as
 
 test('Unsuccessful with empty username and correct password. Status 500', async ({ request }) => {
   const requestParameters = {
-    'username': '',
-    'password': 'qwe'
+    username: '',
+    password: 'qwe',
   }
   const response = await request.get('https://backend.tallinn-learning.ee/test-orders', {
-    params: requestParameters
+    params: requestParameters,
   })
-  const responseBody = await response.json();
+  const responseBody = await response.json()
 
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
@@ -75,19 +81,19 @@ test('Unsuccessful with empty username and correct password. Status 500', async 
   console.log('api key: ', responseBody.message)
   console.log('response headers: ', response.headers())
   expect(response.status()).toBe(StatusCodes.INTERNAL_SERVER_ERROR)
-  expect(responseBody.message).toBe("Username or password is missing")
+  expect(responseBody.message).toBe('Username or password is missing')
   expect(responseBody.apiKey).toBe(null)
 })
 
 test('Unsuccessful with correct username and empty password. Status 500', async ({ request }) => {
   const requestParameters = {
-    'username': 'A',
-    'password': ''
+    username: 'A',
+    password: '',
   }
   const response = await request.get('https://backend.tallinn-learning.ee/test-orders', {
-    params: requestParameters
+    params: requestParameters,
   })
-  const responseBody = await response.json();
+  const responseBody = await response.json()
 
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
@@ -95,6 +101,6 @@ test('Unsuccessful with correct username and empty password. Status 500', async 
   console.log('api key: ', responseBody.message)
   console.log('response headers: ', response.headers())
   expect(response.status()).toBe(StatusCodes.INTERNAL_SERVER_ERROR)
-  expect(responseBody.message).toBe("Username or password is missing")
+  expect(responseBody.message).toBe('Username or password is missing')
   expect(responseBody.apiKey).toBe(null)
 })

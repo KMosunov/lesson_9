@@ -4,10 +4,10 @@ import { StatusCodes } from 'http-status-codes'
 test('Successful deleting order with correct id. Status 204', async ({ request }) => {
   // Test data: 1,2,5,9,10
   const requestHeaders = {
-    'api_key': '1234567890123456'
+    api_key: '1234567890123456',
   }
   const response = await request.delete('https://backend.tallinn-learning.ee/test-orders/5', {
-    headers: requestHeaders
+    headers: requestHeaders,
   })
   console.log('response status: ', response.status())
   console.log('response headers: ', response.headers())
@@ -17,10 +17,10 @@ test('Successful deleting order with correct id. Status 204', async ({ request }
 test('Unsuccessful with incorrect id. Status 400', async ({ request }) => {
   // Test data: 0,11
   const requestHeaders = {
-    'api_key': '1234567890123456'
+    api_key: '1234567890123456',
   }
   const response = await request.delete('https://backend.tallinn-learning.ee/test-orders/0', {
-    headers: requestHeaders
+    headers: requestHeaders,
   })
   console.log('response status: ', response.status())
   console.log('response headers: ', response.headers())
@@ -30,10 +30,10 @@ test('Unsuccessful with incorrect id. Status 400', async ({ request }) => {
 test('Unsuccessful with empty id. Status 400', async ({ request }) => {
   // Test data: 0,11
   const requestHeaders = {
-    'api_key': '1234567890123456'
+    api_key: '1234567890123456',
   }
   const response = await request.delete('https://backend.tallinn-learning.ee/test-orders/', {
-    headers: requestHeaders
+    headers: requestHeaders,
   })
   console.log('response status: ', response.status())
   console.log('response headers: ', response.headers())

@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes'
 
 test('Successful changing order details with correct id. Status 200', async ({ request }) => {
   const requestHeaders = {
-    'api_key': '1234567890123456'
+    api_key: '1234567890123456',
   }
   const requestBody = {
     status: 'OPEN',
@@ -16,7 +16,7 @@ test('Successful changing order details with correct id. Status 200', async ({ r
   // Test data: 1,2,5,9,10
   const response = await request.put(`https://backend.tallinn-learning.ee/test-orders/10`, {
     data: requestBody,
-    headers: requestHeaders
+    headers: requestHeaders,
   })
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
@@ -26,7 +26,7 @@ test('Successful changing order details with correct id. Status 200', async ({ r
 
 test('Successful with correct id and status ACCEPTED. Status 200', async ({ request }) => {
   const requestHeaders = {
-    'api_key': '1234567890123456'
+    api_key: '1234567890123456',
   }
   const requestBody = {
     status: 'ACCEPTED',
@@ -39,7 +39,7 @@ test('Successful with correct id and status ACCEPTED. Status 200', async ({ requ
   // Test data: 1,2,5,9,10
   const response = await request.put(`https://backend.tallinn-learning.ee/test-orders/5`, {
     data: requestBody,
-    headers: requestHeaders
+    headers: requestHeaders,
   })
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
@@ -50,7 +50,7 @@ test('Successful with correct id and status ACCEPTED. Status 200', async ({ requ
 
 test('Successful with correct id and status INPROGRESS. Status 200', async ({ request }) => {
   const requestHeaders = {
-    'api_key': '1234567890123456'
+    api_key: '1234567890123456',
   }
   const requestBody = {
     status: 'INPROGRESS',
@@ -63,7 +63,7 @@ test('Successful with correct id and status INPROGRESS. Status 200', async ({ re
   // Test data: 1,2,5,9,10
   const response = await request.put(`https://backend.tallinn-learning.ee/test-orders/5`, {
     data: requestBody,
-    headers: requestHeaders
+    headers: requestHeaders,
   })
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
@@ -74,7 +74,7 @@ test('Successful with correct id and status INPROGRESS. Status 200', async ({ re
 
 test('Successful with correct id and status DELIVERED. Status 200', async ({ request }) => {
   const requestHeaders = {
-    'api_key': '1234567890123456'
+    api_key: '1234567890123456',
   }
   const requestBody = {
     status: 'DELIVERED',
@@ -87,7 +87,7 @@ test('Successful with correct id and status DELIVERED. Status 200', async ({ req
   // Test data: 1,2,5,9,10
   const response = await request.put(`https://backend.tallinn-learning.ee/test-orders/5`, {
     data: requestBody,
-    headers: requestHeaders
+    headers: requestHeaders,
   })
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
@@ -98,7 +98,7 @@ test('Successful with correct id and status DELIVERED. Status 200', async ({ req
 
 test('Unsuccessful with incorrect customerName. Status 400', async ({ request }) => {
   const requestHeaders = {
-    'api_key': '1234567890123456'
+    api_key: '1234567890123456',
   }
   const requestBody = {
     status: 'OPEN',
@@ -111,7 +111,7 @@ test('Unsuccessful with incorrect customerName. Status 400', async ({ request })
   // Test data: 1,2,5,9,10
   const response = await request.put(`https://backend.tallinn-learning.ee/test-orders/5`, {
     data: requestBody,
-    headers: requestHeaders
+    headers: requestHeaders,
   })
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
@@ -125,7 +125,7 @@ test('Unsuccessful with incorrect customerName. Status 400', async ({ request })
 
 test('Unsuccessful with empty customerName. Status 400', async ({ request }) => {
   const requestHeaders = {
-    'api_key': '1234567890123456'
+    api_key: '1234567890123456',
   }
   const requestBody = {
     status: 'OPEN',
@@ -138,7 +138,7 @@ test('Unsuccessful with empty customerName. Status 400', async ({ request }) => 
   // Test data: 1,2,5,9,10
   const response = await request.put(`https://backend.tallinn-learning.ee/test-orders/5`, {
     data: requestBody,
-    headers: requestHeaders
+    headers: requestHeaders,
   })
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
@@ -152,7 +152,7 @@ test('Unsuccessful with empty customerName. Status 400', async ({ request }) => 
 
 test('Unsuccessful with incorrect customerPhone. Status 400', async ({ request }) => {
   const requestHeaders = {
-    'api_key': '1234567890123456'
+    api_key: '1234567890123456',
   }
   const requestBody = {
     status: 'OPEN',
@@ -165,7 +165,7 @@ test('Unsuccessful with incorrect customerPhone. Status 400', async ({ request }
   // Test data: 1,2,5,9,10
   const response = await request.put(`https://backend.tallinn-learning.ee/test-orders/5`, {
     data: requestBody,
-    headers: requestHeaders
+    headers: requestHeaders,
   })
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
@@ -179,7 +179,7 @@ test('Unsuccessful with incorrect customerPhone. Status 400', async ({ request }
 
 test('Unsuccessful with empty customerPhone. Status 400', async ({ request }) => {
   const requestHeaders = {
-    'api_key': '1234567890123456'
+    api_key: '1234567890123456',
   }
   const requestBody = {
     status: 'OPEN',
@@ -192,7 +192,7 @@ test('Unsuccessful with empty customerPhone. Status 400', async ({ request }) =>
   // Test data: 1,2,5,9,10
   const response = await request.put(`https://backend.tallinn-learning.ee/test-orders/5`, {
     data: requestBody,
-    headers: requestHeaders
+    headers: requestHeaders,
   })
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
@@ -206,7 +206,7 @@ test('Unsuccessful with empty customerPhone. Status 400', async ({ request }) =>
 
 test('Unsuccessful with empty comment. Status 400', async ({ request }) => {
   const requestHeaders = {
-    'api_key': '1234567890123456'
+    api_key: '1234567890123456',
   }
   const requestBody = {
     status: 'OPEN',
@@ -219,7 +219,7 @@ test('Unsuccessful with empty comment. Status 400', async ({ request }) => {
   // Test data: 1,2,5,9,10
   const response = await request.put(`https://backend.tallinn-learning.ee/test-orders/5`, {
     data: requestBody,
-    headers: requestHeaders
+    headers: requestHeaders,
   })
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
@@ -232,7 +232,7 @@ test('Unsuccessful with empty comment. Status 400', async ({ request }) => {
 
 test('Unsuccessful with incorrect id. Status 400', async ({ request }) => {
   const requestHeaders = {
-    'api_key': '1234567890123456'
+    api_key: '1234567890123456',
   }
   const requestBody = {
     status: 'OPEN',
@@ -245,7 +245,7 @@ test('Unsuccessful with incorrect id. Status 400', async ({ request }) => {
   // Test data: 0,11
   const response = await request.put(`https://backend.tallinn-learning.ee/test-orders/11`, {
     data: requestBody,
-    headers: requestHeaders
+    headers: requestHeaders,
   })
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
@@ -255,7 +255,7 @@ test('Unsuccessful with incorrect id. Status 400', async ({ request }) => {
 
 test('Unsuccessful with empty id. Status 405 Method Nit Allowed', async ({ request }) => {
   const requestHeaders = {
-    'api_key': '1234567890123456'
+    api_key: '1234567890123456',
   }
   const requestBody = {
     status: 'OPEN',
@@ -268,7 +268,7 @@ test('Unsuccessful with empty id. Status 405 Method Nit Allowed', async ({ reque
   // Test data: 0,11
   const response = await request.put(`https://backend.tallinn-learning.ee/test-orders/`, {
     data: requestBody,
-    headers: requestHeaders
+    headers: requestHeaders,
   })
   console.log('response status: ', response.status())
   console.log('response body: ', await response.json())
