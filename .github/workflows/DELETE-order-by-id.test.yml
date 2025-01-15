@@ -1,4 +1,4 @@
-name: Check formatting, linting, and run tests
+name: DELETE-order-by-id
 
 on:
   push:
