@@ -1,12 +1,12 @@
-name: Check formatting, linting, and run tests
+name: Run all tests
 
 on:
   push:
     branches:
-      [main, develop]
+      [master, develop]
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   format-lint-test:
@@ -19,20 +19,20 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22.12.0'
 
       - name: Install dependencies
         run: npm ci
 
       - name: Run Prettier check
         run: |
-            echo "Running Prettier to check for formatting issues..."
-            npm run prettier:check
+          echo "Running Prettier to check for formatting issues..."
+          npm run prettier:check
 
       - name: Run ESLint check
         run: |
-            echo "Running ESLint to check for linting issues..."
-            npm run lint 
+          echo "Running ESLint to check for linting issues..."
+          npm run lint 
 
       - name: Run TypeScript compile check
         run: |
@@ -42,4 +42,4 @@ jobs:
       - name: Run Playwright API tests
         run: |
           echo "Running Playwright to execute API tests..."
-          npx playwright test    
+          npx playwright test /HW_09/
