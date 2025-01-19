@@ -1,18 +1,18 @@
 export class OrderDTO {
   status: string | undefined
-  courierId: number
-  customerName: string
-  customerPhone: string
-  comment: string
-  id: number
+  courierId: number | undefined
+  customerName: string | undefined
+  customerPhone: string | undefined
+  comment: string | undefined
+  id: number | undefined
 
   constructor(
     status: string | undefined,
-    courierId: number,
-    customerName: string,
-    customerPhone: string,
-    comment: string,
-    id: number,
+    courierId: number | undefined,
+    customerName: string | undefined,
+    customerPhone: string | undefined,
+    comment: string | undefined,
+    id: number | undefined,
   ) {
     this.status = status
     this.courierId = courierId
@@ -41,6 +41,16 @@ export class OrderDTO {
       '7',
       +Math.floor(Math.random()),
     )
+  }
+  static generateEmptyOrderDto(): OrderDTO {
+    return {
+      comment: undefined,
+      courierId: undefined,
+      customerName: undefined,
+      customerPhone: undefined,
+      id: undefined,
+      status: undefined
+    }
   }
 
   static serializeResponse(json: any): OrderDTO {
