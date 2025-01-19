@@ -2,10 +2,15 @@ import { expect, test } from '@playwright/test'
 import { StatusCodes } from 'http-status-codes'
 import { LoanDTO } from '../DTO/LoanDTO'
 
-test('Successful request with corr income, debt, age, employed, loanAmount, loanPeriod. Status 200', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_1(),
-  })
+test('Successful request with corr income, debt, age, employed, loanAmount, loanPeriod. Status 200', async ({
+  request,
+}) => {
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_1(),
+    },
+  )
   const responseBody = LoanDTO.serializeResponse(await response.json())
 
   console.log(LoanDTO.generateRandomLoanDto_1())
@@ -17,57 +22,84 @@ test('Successful request with corr income, debt, age, employed, loanAmount, loan
   expect.soft(responseBody.riskScore).not.toBeNull()
 })
 
-test('Unuccessful request with incorr income and corr debt, age, employed, loanAmount, loanPeriod. Status 400', async ({ request }) => {
-
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_2(),
-  })
+test('Unuccessful request with incorr income and corr debt, age, employed, loanAmount, loanPeriod. Status 400', async ({
+  request,
+}) => {
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_2(),
+    },
+  )
   console.log(LoanDTO.generateRandomLoanDto_2())
   console.log('response status:', response.status())
   expect(response.status()).toBe(StatusCodes.BAD_REQUEST)
 })
 
-test('Unuccessful request with incorr debt and corr income, debt, age, employed, loanAmount, loanPeriod. Status 400', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_3(),
-  })
+test('Unuccessful request with incorr debt and corr income, debt, age, employed, loanAmount, loanPeriod. Status 400', async ({
+  request,
+}) => {
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_3(),
+    },
+  )
   console.log(LoanDTO.generateRandomLoanDto_3())
   console.log('response status:', response.status())
   expect(response.status()).toBe(StatusCodes.BAD_REQUEST)
 })
 
-test('Unuccessful request with incorr age and corr income, debt, employed, loanAmount, loanPeriod. Status 400', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_4(),
-  })
+test('Unuccessful request with incorr age and corr income, debt, employed, loanAmount, loanPeriod. Status 400', async ({
+  request,
+}) => {
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_4(),
+    },
+  )
   console.log(LoanDTO.generateRandomLoanDto_4())
   console.log('response status:', response.status())
-    //BUG вместо 400 выдает 200
+  //BUG вместо 400 выдает 200
   expect(response.status()).toBe(StatusCodes.BAD_REQUEST)
 })
 
-test('Unuccessful request with negative loanAmount and corr income, debt, age, employed, loanPeriod. Status 400', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_5(),
-  })
+test('Unuccessful request with negative loanAmount and corr income, debt, age, employed, loanPeriod. Status 400', async ({
+  request,
+}) => {
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_5(),
+    },
+  )
   console.log(LoanDTO.generateRandomLoanDto_5())
   console.log('response status:', response.status())
   expect.soft(response.status()).toBe(StatusCodes.BAD_REQUEST)
 })
 
-test('Unuccessful request with incorr loanPeriod and corr income, debt, age, employed, loanAmount. Status 400', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_6(),
-  })
+test('Unuccessful request with incorr loanPeriod and corr income, debt, age, employed, loanAmount. Status 400', async ({
+  request,
+}) => {
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_6(),
+    },
+  )
   console.log(LoanDTO.generateRandomLoanDto_6())
   console.log('response status:', response.status())
   expect.soft(response.status()).toBe(StatusCodes.BAD_REQUEST)
 })
 
 test('Negative response with income less than loanAmount. Status 200', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_7(),
-  })
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_7(),
+    },
+  )
   const responseBody = LoanDTO.serializeResponse(await response.json())
 
   console.log(LoanDTO.generateRandomLoanDto_7())
@@ -78,10 +110,15 @@ test('Negative response with income less than loanAmount. Status 200', async ({ 
   expect.soft(responseBody.riskScore).not.toBeNull()
 })
 
-test('Negative response with equal income and loanAmount and long loanPeriod. Status 200', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_8(),
-  })
+test('Negative response with equal income and loanAmount and long loanPeriod. Status 200', async ({
+  request,
+}) => {
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_8(),
+    },
+  )
   const responseBody = LoanDTO.serializeResponse(await response.json())
 
   console.log(LoanDTO.generateRandomLoanDto_8())
@@ -93,9 +130,12 @@ test('Negative response with equal income and loanAmount and long loanPeriod. St
 })
 
 test('Positive response with income greater than loanPeriod. Status 200', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_9(),
-  })
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_9(),
+    },
+  )
   const responseBody = LoanDTO.serializeResponse(await response.json())
 
   console.log(LoanDTO.generateRandomLoanDto_9())
@@ -110,9 +150,12 @@ test('Positive response with income greater than loanPeriod. Status 200', async 
 })
 
 test('Positive response with High Risk riskScore, periods 3,6. Status 200', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_10(),
-  })
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_10(),
+    },
+  )
   const responseBody = LoanDTO.serializeResponse(await response.json())
 
   console.log(LoanDTO.generateRandomLoanDto_10())
@@ -125,10 +168,15 @@ test('Positive response with High Risk riskScore, periods 3,6. Status 200', asyn
   expect.soft(responseBody.riskPeriods).toEqual([3, 6])
 })
 
-test('Positive response with Medium Risk riskScore, periods 6, 9, 12. Status 200', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_11(),
-  })
+test('Positive response with Medium Risk riskScore, periods 6, 9, 12. Status 200', async ({
+  request,
+}) => {
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_11(),
+    },
+  )
   const responseBody = LoanDTO.serializeResponse(await response.json())
 
   console.log(LoanDTO.generateRandomLoanDto_11())
@@ -141,10 +189,15 @@ test('Positive response with Medium Risk riskScore, periods 6, 9, 12. Status 200
   expect.soft(responseBody.riskPeriods).toEqual([6, 9, 12])
 })
 
-test('Positive response with Low Risk riskScore, periods 12, 18, 24, 30, 36. Status 200', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_12(),
-  })
+test('Positive response with Low Risk riskScore, periods 12, 18, 24, 30, 36. Status 200', async ({
+  request,
+}) => {
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_12(),
+    },
+  )
   const responseBody = LoanDTO.serializeResponse(await response.json())
 
   console.log(LoanDTO.generateRandomLoanDto_12())
@@ -158,9 +211,12 @@ test('Positive response with Low Risk riskScore, periods 12, 18, 24, 30, 36. Sta
 })
 
 test('Positive response with Unknown Risk riskScore. Status 200', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_13(),
-  })
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_13(),
+    },
+  )
   const responseBody = LoanDTO.serializeResponse(await response.json())
 
   console.log(LoanDTO.generateRandomLoanDto_13())
@@ -173,18 +229,24 @@ test('Positive response with Unknown Risk riskScore. Status 200', async ({ reque
 })
 
 test('Unuccessful request with empty income. Status 400', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_14(),
-  })
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_14(),
+    },
+  )
   console.log(LoanDTO.generateRandomLoanDto_14())
   console.log('response status:', response.status())
   expect(response.status()).toBe(StatusCodes.BAD_REQUEST)
 })
 
 test('Unuccessful request with empty debt. Status 400', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_15(),
-  })
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_15(),
+    },
+  )
   console.log(LoanDTO.generateRandomLoanDto_15())
   console.log('response status:', response.status())
   //BUG выдает 200 вместо 400
@@ -192,18 +254,24 @@ test('Unuccessful request with empty debt. Status 400', async ({ request }) => {
 })
 
 test('Unuccessful request with empty age. Status 400', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_16(),
-  })
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_16(),
+    },
+  )
   console.log(LoanDTO.generateRandomLoanDto_16())
   console.log('response status:', response.status())
   expect(response.status()).toBe(StatusCodes.BAD_REQUEST)
 })
 
 test('Unuccessful request with empty employed. Status 400', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_17(),
-  })
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_17(),
+    },
+  )
   console.log(LoanDTO.generateRandomLoanDto_17())
   console.log('response status:', response.status())
   //BUG выдает 200 вместо 400
@@ -211,9 +279,12 @@ test('Unuccessful request with empty employed. Status 400', async ({ request }) 
 })
 
 test('Unuccessful request with empty empty loanAmount. Status 400', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_18(),
-  })
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_18(),
+    },
+  )
   console.log(LoanDTO.generateRandomLoanDto_18())
   console.log('response status:', response.status())
   //BUG выдает 200 вместо 400
@@ -221,9 +292,12 @@ test('Unuccessful request with empty empty loanAmount. Status 400', async ({ req
 })
 
 test('Unuccessful request with empty loanPeriod. Status 400', async ({ request }) => {
-  const response = await request.post(`https://backend.tallinn-learning.ee/api/loan-calc/decision`, {
-    data: LoanDTO.generateRandomLoanDto_19(),
-  })
+  const response = await request.post(
+    `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
+    {
+      data: LoanDTO.generateRandomLoanDto_19(),
+    },
+  )
   console.log(LoanDTO.generateRandomLoanDto_19())
   console.log('response status:', response.status())
   //BUG выдает 200 вместо 400
