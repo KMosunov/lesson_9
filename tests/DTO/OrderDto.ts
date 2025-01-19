@@ -49,7 +49,7 @@ export class OrderDTO {
       customerName: undefined,
       customerPhone: undefined,
       id: undefined,
-      status: undefined
+      status: undefined,
     }
   }
 
