@@ -91,11 +91,11 @@ export class LoanDTO {
 
   static generateRandomLoanDto_7(): LoanDTO {
     return new LoanDTO(
-      +Math.floor(Math.random() * (100 - 1) + 1),
+      100,
       0,
       Math.floor(Math.random() * (100 - 16) + 16),
       true,
-      +Math.floor(Math.random() * (100000 - 1) + 1),
+      100000,
       +Math.floor(Math.random() * (30 - 1) + 1),
     )
   }
