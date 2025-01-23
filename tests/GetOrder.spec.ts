@@ -1,13 +1,17 @@
 import { expect, test } from '@playwright/test'
+import { OrderDTO } from './DTO/OrderDto'
 
 test('get order with correct id should receive code 200', async ({ request }) => {
   // Build and send a GET request to the server
   const response = await request.get('https://backend.tallinn-learning.ee/test-orders/1')
   // Log the response status, body and headers
+  const responseBody = OrderDTO.serializeResponse(await response.json())
   console.log('response body:', await response.json())
   console.log('response headers:', response.headers())
   // Check if the response status is 200
-  expect(response.status()).toBe(200)
+  expect.soft(response.status()).toBe(200)
+  //expect.soft(responseBody.courierId).not.toBe(null)
+  expect.soft(responseBody.status).toBe('OPEN')
 })
 
 test('get order with id = 0', async ({ request }) => {
