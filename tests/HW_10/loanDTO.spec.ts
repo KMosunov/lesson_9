@@ -2,9 +2,7 @@ import { expect, test } from '@playwright/test'
 import { StatusCodes } from 'http-status-codes'
 import { LoanDTO } from '../DTO/LoanDTO'
 
-test('Successful request with corr data. Status 200. Status 200', async ({
-  request,
-}) => {
+test('Successful request with corr data. Status 200. Status 200', async ({ request }) => {
   const response = await request.post(
     `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
     {
@@ -21,9 +19,7 @@ test('Successful request with corr data. Status 200. Status 200', async ({
   expect.soft(responseBody.riskScore).not.toBeNull()
 })
 
-test('Unuccessful request with incorr income. Status 400', async ({
-  request,
-}) => {
+test('Unuccessful request with incorr income. Status 400', async ({ request }) => {
   const response = await request.post(
     `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
     {
@@ -35,9 +31,7 @@ test('Unuccessful request with incorr income. Status 400', async ({
   expect(response.status()).toBe(StatusCodes.BAD_REQUEST)
 })
 
-test('Unuccessful request with incorr debt. Status 400', async ({
-  request,
-}) => {
+test('Unuccessful request with incorr debt. Status 400', async ({ request }) => {
   const response = await request.post(
     `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
     {
@@ -49,9 +43,7 @@ test('Unuccessful request with incorr debt. Status 400', async ({
   expect(response.status()).toBe(StatusCodes.BAD_REQUEST)
 })
 
-test('Unuccessful request with incorr age. Status 400', async ({
-  request,
-}) => {
+test('Unuccessful request with incorr age. Status 400', async ({ request }) => {
   const response = await request.post(
     `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
     {
@@ -64,9 +56,7 @@ test('Unuccessful request with incorr age. Status 400', async ({
   expect(response.status()).toBe(StatusCodes.BAD_REQUEST)
 })
 
-test('Unuccessful request with negative loanAmount. Status 400', async ({
-  request,
-}) => {
+test('Unuccessful request with negative loanAmount. Status 400', async ({ request }) => {
   const response = await request.post(
     `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
     {
@@ -78,9 +68,7 @@ test('Unuccessful request with negative loanAmount. Status 400', async ({
   expect.soft(response.status()).toBe(StatusCodes.BAD_REQUEST)
 })
 
-test('Unuccessful request with incorr loanPeriod. Status 400', async ({
-  request,
-}) => {
+test('Unuccessful request with incorr loanPeriod. Status 400', async ({ request }) => {
   const response = await request.post(
     `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
     {
@@ -166,9 +154,7 @@ test('Positive response with High Risk, periods 3,6. Status 200', async ({ reque
   expect.soft(responseBody.riskPeriods).toEqual([3, 6])
 })
 
-test('Positive response with Medium Risk, periods 6, 9, 12. Status 200', async ({
-  request,
-}) => {
+test('Positive response with Medium Risk, periods 6, 9, 12. Status 200', async ({ request }) => {
   const response = await request.post(
     `https://backend.tallinn-learning.ee/api/loan-calc/decision`,
     {
