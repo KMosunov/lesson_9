@@ -50,7 +50,6 @@ test.describe('Login tests', async () => {
       data: LoginDTO.createLoginWithIncorrectData(),
     })
     console.log(await response.text())
-    console.log('response status:', response.status())
     expect(response.status()).toBe(StatusCodes.UNAUTHORIZED)
   })
 })
