@@ -16,7 +16,7 @@ function logResponse(requestData: LoanDTO, response: APIResponse, responseBody =
   if (responseBody) console.log('Response body:', responseBody)
 }
 
-function expectStatus(response: APIResponse, expectedStatus: unknown):void {
+function expectStatus(response: APIResponse, expectedStatus: unknown): void {
   expect(response.status()).toBe(expectedStatus)
 }
 
