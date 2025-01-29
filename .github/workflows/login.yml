@@ -1,4 +1,4 @@
-name: Login
+name: Login tests
 
 on:
   push:
@@ -40,8 +40,10 @@ jobs:
 
       - name: Run Playwright API tests
         env:
-          USERNAME: ${{ secrets.USERNAME}}
+          USERNAME: ${{secrets.USERNAME}}
           PASSWORD: ${{secrets.PASSWORD}}
+          USERNAME_1: ${{secrets.USERNAME_1}}
+          PASSWORD_1: ${{secrets.PASSWORD_1}}
         run: |
           echo "Running Playwright to execute API tests..."
-          npx playwright test tests/login.spec.ts
+          npx playwright test test /HW_11/
