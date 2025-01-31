@@ -23,20 +23,10 @@ export class OrderDTO {
   }
 
   static generateRandomOrderDto(): OrderDTO {
-    return new OrderDTO(
-      'OPEN',
-      'David',
-      '9494949494',
-      'no',
-    )
+    return new OrderDTO('OPEN', 'David', '9494949494', 'no')
   }
   static generateFirstRandomOrderDto(): OrderDTO {
-    return new OrderDTO(
-      undefined,
-      'David',
-      'Anna',
-      '909090999999',
-    )
+    return new OrderDTO(undefined, 'David', 'Anna', '909090999999')
   }
   static generateEmptyOrderDto(): OrderDTO {
     return {
