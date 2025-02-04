@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes'
 import { LoginDTO } from '../DTO/LoginDTO'
 
 test.describe('Login tests', async () => {
-  test('Successful authorization', async ({ request }) => {
+  test('TL-12-1 Successful authorization', async ({ request }) => {
     const response = await request.post('https://backend.tallinn-learning.ee/login/student', {
       data: LoginDTO.createLoginWithCorrectData(),
     })
@@ -13,6 +13,7 @@ test.describe('Login tests', async () => {
       .soft(/^eyJhb[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/.test(await response.text()))
       .toBeTruthy()
   })
+
   test('Unsuccessful authorization with GET method', async ({ request }) => {
     const response = await request.get('https://backend.tallinn-learning.ee/login/student', {
       data: LoginDTO.createLoginWithCorrectData(),
