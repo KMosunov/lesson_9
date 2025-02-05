@@ -30,7 +30,9 @@ test.describe('Order tests NO API', async () => {
     expect(responseCreateOrder.status()).toBe(StatusCodes.OK)
   })
 
-  test('TL-12-3 NO API Client Successful authorization, order creation and order status', async ({ request }) => {
+  test('TL-12-3 NO API Client Successful authorization, order creation and order status', async ({
+    request,
+  }) => {
     const responseLogin = await request.post('https://backend.tallinn-learning.ee/login/student', {
       data: LoginDTO.createLoginWithCorrectData(),
     })
@@ -65,8 +67,8 @@ test.describe('Order tests NO API', async () => {
   })
 
   test('TL-12-4 No Api Client Successful authorization, order creation, order status and delete', async ({
-                                                                                             request,
-                                                                                           }) => {
+    request,
+  }) => {
     const responseLogin = await request.post('https://backend.tallinn-learning.ee/login/student', {
       data: LoginDTO.createLoginWithCorrectData(),
     })
