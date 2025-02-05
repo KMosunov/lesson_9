@@ -1,5 +1,3 @@
-//USERNAME=mosunovk;PASSWORD=ztd4sqbYbfT2n
-
 import { expect, test } from '@playwright/test'
 import { StatusCodes } from 'http-status-codes'
 import { OrderDTO } from '../DTO/OrderDto'
