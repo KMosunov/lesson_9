@@ -1,4 +1,4 @@
-name: Login and order tests
+name: API / No API tests
 
 on:
   push:
