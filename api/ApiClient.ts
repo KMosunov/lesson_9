@@ -75,6 +75,5 @@ export class ApiClient {
     const responseBody = await responseDel.json()
     console.log('Order deleted: ', responseBody)
     expect(responseBody).toBe(true)
-
   }
 }
