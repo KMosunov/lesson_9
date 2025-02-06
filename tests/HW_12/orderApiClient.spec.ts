@@ -40,10 +40,42 @@ test.describe('Order tests API Client', async () => {
     expect(requestedOrder.status).toBe('OPEN')
   })
 
-  test('TL-12-4 API Successful authorization, order creation, order status and delete', async ({
+  test('TL-12-4 API Successful authorization, order creation and delete', async ({
     request,
   }) => {
     const apiClient = await ApiClient.getInstance(request)
     await apiClient.deleteOrder()
   })
+
+  test('TL-12-5 API Successful authorization, order creation, delete and check', async ({request}) => {
+    const apiClient = await ApiClient.getInstance(request)
+    const orderId = await apiClient.createOrderAndReturnOrderId()
+    const deleteOrder = await request.delete(
+      `https://backend.tallinn-learning.ee/orders/${await orderId}`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + apiClient.jwt,
+        },
+      },
+    )
+    console.log('Order Id to delete',orderId)
+    expect(deleteOrder.status()).toBe(StatusCodes.OK)
+
+    const responseBodyDel = await deleteOrder.json()
+    expect(responseBodyDel).toBe(true)
+
+    const check = await request.get(
+      `https://backend.tallinn-learning.ee/orders/${orderId}`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + apiClient.jwt,
+        },
+      },
+    )
+    console.log('GET request for deleted order',check.status())
+    //BUG 200 instead of 400
+    expect(check.status()).toBe(StatusCodes.BAD_REQUEST)
+
+  })
+
 })
