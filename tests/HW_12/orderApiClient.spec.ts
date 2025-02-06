@@ -22,9 +22,13 @@ test.describe('Order tests API Client', async () => {
     expect(responseCreateOrder.status()).toBe(StatusCodes.OK)
   })
 
-  test('TL-12-3 API Successful authorization, order creation and order status', async ({request}) => {
+  test('TL-12-3 API Successful authorization, order creation and order status', async ({
+    request,
+  }) => {
     const apiClient = await ApiClient.getInstance(request)
-    const responseOrderStatus = await request.get(`https://backend.tallinn-learning.ee/orders/${await apiClient.createOrderAndReturnOrderId()}`, {
+    const responseOrderStatus = await request.get(
+      `https://backend.tallinn-learning.ee/orders/${await apiClient.createOrderAndReturnOrderId()}`,
+      {
         headers: {
           Authorization: 'Bearer ' + apiClient.jwt,
         },
@@ -36,7 +40,9 @@ test.describe('Order tests API Client', async () => {
     expect(requestedOrder.status).toBe('OPEN')
   })
 
-  test('TL-12-4 API Successful authorization, order creation, order status and delete', async ({request}) => {
+  test('TL-12-4 API Successful authorization, order creation, order status and delete', async ({
+    request,
+  }) => {
     const apiClient = await ApiClient.getInstance(request)
     await apiClient.deleteOrder()
   })
