@@ -70,7 +70,7 @@ test.describe('Order tests API Client', async () => {
       },
     })
     console.log('GET request for deleted order', check.status())
-    //BUG 200 instead of 400
-    expect(check.status()).toBe(StatusCodes.BAD_REQUEST)
+    //BUG: 200 instead of 404
+    expect(check.status()).toBe(StatusCodes.NOT_FOUND)
   })
 })
