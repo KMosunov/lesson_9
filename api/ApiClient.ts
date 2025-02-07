@@ -58,10 +58,10 @@ export class ApiClient {
     return responseBody.id
   }
 
-  async deleteOrder(): Promise<void> {
+  async deleteOrder(orderId: number): Promise<void> {
     console.log('Deleting order ...')
     const responseDel = await this.request.delete(
-      `${serviceURL}${orderPath}/${await this.createOrderAndReturnOrderId()}`,
+      `${serviceURL}${orderPath}/${orderId}`,
       {
         headers: {
           Authorization: `Bearer ${this.jwt}`,
@@ -69,11 +69,8 @@ export class ApiClient {
       },
     )
 
-    console.log('Order del response: ', responseDel)
-
     expect(responseDel.status()).toBe(StatusCodes.OK)
     const responseBody = await responseDel.json()
-    console.log('Order deleted: ', responseBody)
     expect(responseBody).toBe(true)
   }
 }

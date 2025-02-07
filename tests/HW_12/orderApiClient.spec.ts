@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 import { StatusCodes } from 'http-status-codes'
 import { OrderDTO } from '../DTO/OrderDto'
 import { ApiClient } from '../../api/ApiClient'
-import exp from 'node:constants'
+
 
 test.describe('Order tests API Client', async () => {
   test('TL-12-1 API Client Successful authorization', async ({ request }) => {
@@ -41,37 +41,21 @@ test.describe('Order tests API Client', async () => {
     expect(requestedOrder.status).toBe('OPEN')
   })
 
-  test('TL-12-4 API Successful authorization, order creation and delete', async ({ request }) => {
-    const apiClient = await ApiClient.getInstance(request)
-    await apiClient.deleteOrder()
-  })
 
-  test('TL-12-5 API Successful authorization, order creation, delete and check', async ({
+  test('TL-12-4 API Successful authorization, order creation, delete and check', async ({
     request,
   }) => {
     const apiClient = await ApiClient.getInstance(request)
     const orderId = await apiClient.createOrderAndReturnOrderId()
-    const deleteOrder = await request.delete(
-      `https://backend.tallinn-learning.ee/orders/${await orderId}`,
-      {
-        headers: {
-          Authorization: 'Bearer ' + apiClient.jwt,
-        },
-      },
-    )
-    console.log('Order Id to delete', orderId)
-    expect(deleteOrder.status()).toBe(StatusCodes.OK)
-
-    const responseBodyDel = await deleteOrder.json()
-    expect(responseBodyDel).toBe(true)
-
+    await apiClient.deleteOrder(orderId)
     const check = await request.get(`https://backend.tallinn-learning.ee/orders/${orderId}`, {
       headers: {
         Authorization: 'Bearer ' + apiClient.jwt,
       },
     })
-    console.log('GET request for deleted order', check.status())
-    //BUG: 200 instead of 404
-    expect(check.status()).toBe(StatusCodes.NOT_FOUND)
+
+    expect.soft(check.status()).toBe(StatusCodes.NOT_FOUND) //BUG: 200 instead of 404
+    const response = await check.text()
+    expect(response).toBe('')
   })
 })
