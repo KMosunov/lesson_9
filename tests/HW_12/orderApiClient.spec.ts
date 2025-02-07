@@ -3,7 +3,6 @@ import { StatusCodes } from 'http-status-codes'
 import { OrderDTO } from '../DTO/OrderDto'
 import { ApiClient } from '../../api/ApiClient'
 
-
 test.describe('Order tests API Client', async () => {
   test('TL-12-1 API Client Successful authorization', async ({ request }) => {
     const apiClient = await ApiClient.getInstance(request)
@@ -40,7 +39,6 @@ test.describe('Order tests API Client', async () => {
     expect(requestedOrder.status).toBeDefined()
     expect(requestedOrder.status).toBe('OPEN')
   })
-
 
   test('TL-12-4 API Successful authorization, order creation, delete and check', async ({
     request,
