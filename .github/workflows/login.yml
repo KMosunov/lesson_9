@@ -42,8 +42,6 @@ jobs:
         env:
           USERNAME: ${{secrets.USERNAME}}
           PASSWORD: ${{secrets.PASSWORD}}
-          USERNAME_1: ${{secrets.USERNAME_1}}
-          PASSWORD_1: ${{secrets.PASSWORD_1}}
         run: |
           echo "Running Playwright to execute API tests..."
           npx playwright test /HW_11/
