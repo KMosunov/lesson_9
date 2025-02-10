@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes'
 import { LoginDTO } from '../DTO/LoginDTO'
 import { OrderDTO } from '../DTO/OrderDto'
 
-test.describe('Order tests', async () => {
+test.describe('Order tests NO API', async () => {
   test('TL-12-1 Successful authorization', async ({ request }) => {
     const response = await request.post('https://backend.tallinn-learning.ee/login/student', {
       data: LoginDTO.createLoginWithCorrectData(),
@@ -15,7 +15,7 @@ test.describe('Order tests', async () => {
       .toBeTruthy()
   })
 
-  test('TL-12-2 Successful authorization and order creation', async ({ request }) => {
+  test('TL-12-2 NO API Client Successful authorization and order creation', async ({ request }) => {
     const responseLogin = await request.post('https://backend.tallinn-learning.ee/login/student', {
       data: LoginDTO.createLoginWithCorrectData(),
     })
@@ -30,7 +30,9 @@ test.describe('Order tests', async () => {
     expect(responseCreateOrder.status()).toBe(StatusCodes.OK)
   })
 
-  test('TL-12-3 Successful authorization, order creation and order status', async ({ request }) => {
+  test('TL-12-3 NO API Client Successful authorization, order creation and order status', async ({
+    request,
+  }) => {
     const responseLogin = await request.post('https://backend.tallinn-learning.ee/login/student', {
       data: LoginDTO.createLoginWithCorrectData(),
     })
@@ -64,7 +66,7 @@ test.describe('Order tests', async () => {
     expect(requestedOrder.status).toBe('OPEN')
   })
 
-  test('TL-12-4 Successful authorization, order creation, order status and delete', async ({
+  test('TL-12-4 No Api Client Successful authorization, order creation, order status and delete', async ({
     request,
   }) => {
     const responseLogin = await request.post('https://backend.tallinn-learning.ee/login/student', {
