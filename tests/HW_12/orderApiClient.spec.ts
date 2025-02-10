@@ -26,14 +26,8 @@ test.describe('Order tests API Client', async () => {
     request,
   }) => {
     const apiClient = await ApiClient.getInstance(request)
-    const responseOrderStatus = await request.get(
-      `https://backend.tallinn-learning.ee/orders/${await apiClient.createOrderAndReturnOrderId()}`,
-      {
-        headers: {
-          Authorization: 'Bearer ' + apiClient.jwt,
-        },
-      },
-    )
+    const orderId = await apiClient.createOrderAndReturnOrderId()
+    const responseOrderStatus = await apiClient.getOrderById(orderId)
     expect(responseOrderStatus.status()).toBe(StatusCodes.OK)
     const requestedOrder = OrderDTO.serializeResponse(await responseOrderStatus.json())
     expect(requestedOrder.status).toBeDefined()
@@ -46,14 +40,10 @@ test.describe('Order tests API Client', async () => {
     const apiClient = await ApiClient.getInstance(request)
     const orderId = await apiClient.createOrderAndReturnOrderId()
     await apiClient.deleteOrder(orderId)
-    const check = await request.get(`https://backend.tallinn-learning.ee/orders/${orderId}`, {
-      headers: {
-        Authorization: 'Bearer ' + apiClient.jwt,
-      },
-    })
+    const check = await apiClient.getOrderById(orderId)
 
-    expect.soft(check.status()).toBe(StatusCodes.NOT_FOUND) //BUG: 200 instead of 404
     const response = await check.text()
-    expect(response).toBe('')
+    expect.soft(response).toBe('')
+    expect.soft(check.status()).toBe(StatusCodes.NOT_FOUND) //BUG: 200 instead of 404
   })
 })

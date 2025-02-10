@@ -1,4 +1,4 @@
-import { APIRequestContext } from 'playwright-core'
+import { APIRequestContext, APIResponse } from 'playwright-core'
 import { LoginDTO } from '../tests/DTO/LoginDTO'
 import { StatusCodes } from 'http-status-codes'
 import { OrderDTO } from '../tests/DTO/OrderDto'
@@ -69,5 +69,14 @@ export class ApiClient {
     expect(responseDel.status()).toBe(StatusCodes.OK)
     const responseBody = await responseDel.json()
     expect(responseBody).toBe(true)
+  }
+
+  async getOrderById(orderId: number): Promise<APIResponse> {
+    console.log('Getting order...')
+    return await this.request.get(`${serviceURL}${orderPath}/${orderId}`, {
+      headers: {
+        Authorization: `Bearer ${this.jwt}`,
+      },
+    })
   }
 }
