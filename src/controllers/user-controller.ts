@@ -14,10 +14,10 @@ interface User {
 const users: User[] = [];
 
 // log requests
-router.use((req: Request, res: Response, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
-  next();
-});
+router.use((req: Request, res: Response, next: () => void) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`)
+  next()
+})
 
 // Get all users
 router.get("/", (req: Request, res: Response) => {

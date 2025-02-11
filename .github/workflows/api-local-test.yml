@@ -46,7 +46,7 @@ jobs:
           up-flags: -d
 
       - name: Run test for empty array scenario
-        run: npx playwright test tests/emptyArray.spec.ts
+        run: npx playwright test tests/emptyArray.spec.ts  --workers=1
 
       - name: Run Playwright API tests
         run: |
