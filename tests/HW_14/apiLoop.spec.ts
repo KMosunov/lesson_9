@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes'
 
 const baseURL = 'http://localhost:3000/users'
 
-test.describe('TL-14-01 User management API with loop', () => {
+test.describe('User management API with loop', () => {
   test.beforeEach(async ({ request }) => {
     const response = await request.get(`${baseURL}`)
     const responseBody = await response.json()
