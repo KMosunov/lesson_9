@@ -38,6 +38,12 @@ jobs:
           echo "Running TypeScript compiler to check for type issues..."
           npx tsc --noEmit
 
+      - name: Set up Docker Compose
+        uses: hoverkraft-tech/compose-action@v2.0.1
+        with:
+          compose-file: ./docker-compose.yaml
+          up-flags: -d
+
       - name: Run Playwright API tests
         run: |
           echo "Running Playwright to execute local API tests..."
