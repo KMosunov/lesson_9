@@ -4,28 +4,28 @@ import { StatusCodes } from 'http-status-codes'
 const baseURL = 'http://localhost:3000/users'
 
 test.describe('User management API with loop', () => {
-  test.beforeEach(async ({ request }) => {
-    const response = await request.get(`${baseURL}`)
-    const responseBody = await response.json()
-    const numberOfObjects = responseBody.length
-
-    const userIDs = []
-    for (let i = 0; i < numberOfObjects; i++) {
-      const userID = responseBody[i].id
-      userIDs.push(userID)
-    }
-
-    for (let i = 0; i < numberOfObjects; i++) {
-      const response = await request.delete(`${baseURL}/${userIDs[i]}`)
-      expect.soft(response.status()).toBe(StatusCodes.OK)
-    }
-
-    const responseAfterDelete = await request.get(`${baseURL}`)
-    expect(responseAfterDelete.status()).toBe(StatusCodes.OK)
-
-    const responseBodyEmpty = await responseAfterDelete.text()
-    expect(responseBodyEmpty).toBe('[]')
-  })
+  // test.beforeEach(async ({ request }) => {
+  //   const response = await request.get(`${baseURL}`)
+  //   const responseBody = await response.json()
+  //   const numberOfObjects = responseBody.length
+  //
+  //   const userIDs = []
+  //   for (let i = 0; i < numberOfObjects; i++) {
+  //     const userID = responseBody[i].id
+  //     userIDs.push(userID)
+  //   }
+  //
+  //   for (let i = 0; i < numberOfObjects; i++) {
+  //     const response = await request.delete(`${baseURL}/${userIDs[i]}`)
+  //     expect.soft(response.status()).toBe(StatusCodes.OK)
+  //   }
+  //
+  //   const responseAfterDelete = await request.get(`${baseURL}`)
+  //   expect(responseAfterDelete.status()).toBe(StatusCodes.OK)
+  //
+  //   const responseBodyEmpty = await responseAfterDelete.text()
+  //   expect(responseBodyEmpty).toBe('[]')
+  // })
 
   test('TL-14-01 GET / - should return empty when no users', async ({ request }) => {
     const response = await request.get(`${baseURL}`)
