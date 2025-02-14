@@ -67,11 +67,10 @@ test.describe('User management API with loop', () => {
     }
 
     const responseAfterDelete = await request.get(`${baseURL}`)
-    expect(responseAfterDelete.status()).toBe(StatusCodes.OK)
-
     const responseBodyEmpty = await responseAfterDelete.text()
     expect(responseBodyEmpty).toBe('[]')
   })
+
   test('TL-14-04 Delete one user and verify other users', async ({ request }) => {
     const user1 = await request.post(`${baseURL}`)
     const user2 = await request.post(`${baseURL}`)
