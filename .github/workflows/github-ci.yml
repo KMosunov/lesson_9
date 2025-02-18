@@ -44,7 +44,7 @@ jobs:
           PASSWORD: ${{secrets.PASSWORD}}
         run: |
           echo "Running ENV variable tests..."
-          npx playwright test /HW_11/login.spec.ts
+          npx playwright test /HW_11/login.spec.ts /HW_12/
 
       - name: Set up Docker Compose
         uses: hoverkraft-tech/compose-action@v2.0.1
@@ -65,10 +65,10 @@ jobs:
           echo "Running Playwright to execute local loop API tests..."
           npx playwright test tests/HW_14/apiLoop.spec.ts --workers=1
 
-      - name: Run API and No API tests
-        env:
-          USERNAME: ${{secrets.USERNAME}}
-          PASSWORD: ${{secrets.PASSWORD}}
-        run: |
-          echo "Running Playwright to execute API tests..."
-          npx playwright test tests/HW_12/ --workers=1
+#      - name: Run API and No API tests
+#        env:
+#          USERNAME: ${{secrets.USERNAME}}
+#          PASSWORD: ${{secrets.PASSWORD}}
+#        run: |
+#          echo "Running Playwright to execute API tests..."
+#          npx playwright test tests/HW_12/ --workers=1
