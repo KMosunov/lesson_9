@@ -38,13 +38,13 @@ jobs:
           echo "Running TypeScript compiler to check for type issues..."
           npx tsc --noEmit
 
-      - name: Run ENV variables tests
+      - name: Run API ENV variables tests
         env:
           USERNAME: ${{secrets.USERNAME}}
           PASSWORD: ${{secrets.PASSWORD}}
         run: |
           echo "Running ENV variable tests..."
-          npx playwright test /HW_11/login.spec.ts /HW_12/
+          npx playwright test /HW_11/ /HW_12/ --workers=1
 
       - name: Set up Docker Compose
         uses: hoverkraft-tech/compose-action@v2.0.1
@@ -52,7 +52,7 @@ jobs:
           compose-file: ./docker-compose.yaml
           up-flags: -d
 
-      - name: Run local test for empty array scenario
+      - name: Run local API test for empty array scenario
         run: npx playwright test tests/emptyArray.spec.ts  --workers=1
 
       - name: Run Playwright local API tests
@@ -65,10 +65,7 @@ jobs:
           echo "Running Playwright to execute local loop API tests..."
           npx playwright test tests/HW_14/apiLoop.spec.ts --workers=1
 
-#      - name: Run API and No API tests
-#        env:
-#          USERNAME: ${{secrets.USERNAME}}
-#          PASSWORD: ${{secrets.PASSWORD}}
-#        run: |
-#          echo "Running Playwright to execute API tests..."
-#          npx playwright test tests/HW_12/ --workers=1
+      - name: Run rest API tests
+        run: |
+          echo "Running Playwright to execute API tests..."
+          npx playwright test tests/HW_09/ /HW_10/ --workers=1
