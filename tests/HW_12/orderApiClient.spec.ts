@@ -43,8 +43,8 @@ test.describe('Order tests API Client', async () => {
     const check = await apiClient.getOrderById(orderId)
     console.log(check)
 
-  const response = await check.text()
-  expect.soft(response).toBe('')
-  //expect.soft(check.status()).toBe(StatusCodes.NOT_FOUND) //BUG: 200 instead of 404
+    const response = await check.text()
+    expect.soft(response).toBe('')
+    //expect.soft(check.status()).toBe(StatusCodes.NOT_FOUND) //BUG: 200 instead of 404
   })
 })
