@@ -44,7 +44,7 @@ jobs:
           PASSWORD: ${{secrets.PASSWORD}}
         run: |
           echo "Running ENV variable tests..."
-          npx playwright tests/HW_11/login.spec.ts
+          npx playwright tests/HW_11/
 
       - name: Set up Docker Compose
         uses: hoverkraft-tech/compose-action@v2.0.1
