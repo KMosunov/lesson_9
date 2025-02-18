@@ -46,7 +46,7 @@ jobs:
           echo "Running ENV variable tests..."
           npx playwright tests/HW_11/login.spec.ts
 
-                - name: Set up Docker Compose
+      - name: Set up Docker Compose
         uses: hoverkraft-tech/compose-action@v2.0.1
         with:
           compose-file: ./docker-compose.yaml
