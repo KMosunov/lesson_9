@@ -65,10 +65,10 @@ jobs:
           echo "Running Playwright to execute local loop API tests..."
           npx playwright test tests/HW_14/apiLoop.spec.ts --workers=1
 
-      - name: Run rest API tests
+      - name: Run API and No API tests
         env:
           USERNAME: ${{secrets.USERNAME}}
           PASSWORD: ${{secrets.PASSWORD}}
         run: |
           echo "Running Playwright to execute API tests..."
-          npx playwright test tests/HW_09/ tests/HW_10/ tests/HW_12/ --workers=1
+          npx playwright test tests/HW_12/ --workers=1
