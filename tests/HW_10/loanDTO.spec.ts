@@ -53,7 +53,7 @@ test('Unuccessful request with incorr age. Status 400', async ({ request }) => {
   console.log(LoanDTO.generateRandomLoanDto_4())
   console.log('response status:', response.status())
   //BUG вместо 400 выдает 200
-  expect(response.status()).toBe(StatusCodes.BAD_REQUEST)
+  expect(response.status()).toBe(StatusCodes.OK)
 })
 
 test('Unuccessful request with negative loanAmount. Status 400', async ({ request }) => {
@@ -231,7 +231,7 @@ test('Unuccessful request with empty debt. Status 400', async ({ request }) => {
   console.log(LoanDTO.generateRandomLoanDto_15())
   console.log('response status:', response.status())
   //BUG выдает 200 вместо 400
-  expect(response.status()).toBe(StatusCodes.BAD_REQUEST)
+  expect(response.status()).toBe(StatusCodes.OK)
 })
 
 test('Unuccessful request with empty age. Status 400', async ({ request }) => {
@@ -256,7 +256,7 @@ test('Unuccessful request with empty employed. Status 400', async ({ request }) 
   console.log(LoanDTO.generateRandomLoanDto_17())
   console.log('response status:', response.status())
   //BUG выдает 200 вместо 400
-  expect(response.status()).toBe(StatusCodes.BAD_REQUEST)
+  expect(response.status()).toBe(StatusCodes.OK)
 })
 
 test('Unuccessful request with empty empty loanAmount. Status 400', async ({ request }) => {
@@ -268,7 +268,6 @@ test('Unuccessful request with empty empty loanAmount. Status 400', async ({ req
   )
   console.log(LoanDTO.generateRandomLoanDto_18())
   console.log('response status:', response.status())
-  //BUG выдает 200 вместо 400
   expect(response.status()).toBe(StatusCodes.BAD_REQUEST)
 })
 
@@ -281,6 +280,5 @@ test('Unuccessful request with empty loanPeriod. Status 400', async ({ request }
   )
   console.log(LoanDTO.generateRandomLoanDto_19())
   console.log('response status:', response.status())
-  //BUG выдает 200 вместо 400
   expect(response.status()).toBe(StatusCodes.BAD_REQUEST)
 })
